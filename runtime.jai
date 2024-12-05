@@ -16,7 +16,9 @@
 
 	// Call this every frame.
 	FrameMark :: () #expand #no_debug {
-		___tracy_emit_frame_mark(null);
+		if profiler_running {
+			___tracy_emit_frame_mark(null);
+		}
 	}
 
 	// Call this at the start of the scope you want to profile.
