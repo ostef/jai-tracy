@@ -1,17 +1,19 @@
 # Tracy bindings for Jai
 
-Jai bindings for the [Tracy profiler](https://github.com/wolfpld/tracy) v0.9.
+Jai bindings for the [Tracy profiler](https://github.com/wolfpld/tracy) v0.11.1.
 
-It’s originally based on [vrcamillo/jai-tracy](https://github.com/vrcamillo/jai-tracy), but modified to work as an auto-instrumenting metaprogram plugin (like modules/Iprof).
+It’s originally based on [rluba/jai-tracy](https://github.com/rluba/jai-tracy) and [vrcamillo/jai-tracy](https://github.com/vrcamillo/jai-tracy), but modified to work as an auto-instrumenting metaprogram plugin (like modules/Iprof).
+
+Running the profiler uses up a lot of memory, so the profiler does not run by default. You can toggle the profiler running using the `ToggleProfiler` function.
 
 ## Setup
 
-1. Ensure that the `tracy` submodule is cloned at the root of the repository.
+1. Ensure that the Tracy source code submodule is cloned in the `Source` directory.
 2. Build the static and shared libraries using `jai build.jai` at the root of the repository.
 
 ## Profiling run-time code
 
-Just use this module as a metaprogram plugin by adding `-pluging tracy` to your compile command.
+Just use this module as a metaprogram plugin by adding `-pluging Tracy` to your compile command.
 If you want to profile modules code (in addition to your application code) you can append the argument `-modules`.
 
 You might need to add `-- import_dir <path_to_modules_folder_that_contains_tracy>` if this module does not live in your default modules folder.
