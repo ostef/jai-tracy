@@ -79,7 +79,7 @@ message :: (p: *Metaprogram_Plugin, message: *Message) {
 
                     // Don't profile stuff that is in Tracy itself:
                     // @Robustness: Hardcoded module name for now.
-                    if import.module_name == "tracy"  continue;
+                    if import.module_name == "Tracy"  continue;
             }
         }
 
@@ -124,7 +124,7 @@ shutdown :: (p: *Metaprogram_Plugin) {
 // Why are we adding an entry to the context? It's so that submodules can see
 // the import, so that the code we inject actually works.
 TO_INSERT :: #string DONE
-__Tracy :: #import "tracy"(IMPORT_MODE=.CLIENT);
+__Tracy :: #import "Tracy"(IMPORT_MODE=.CLIENT);
 #add_context _Tracy :: __Tracy;
 DONE
 
