@@ -7,7 +7,6 @@
     }
 }
 
-
 #if IMPORT_MODE == .METAPROGRAM {
     // When being imported by a metaprogram, we provide code for instrumenting the target program,
     // including the Metaprogram_Plugin interface.
