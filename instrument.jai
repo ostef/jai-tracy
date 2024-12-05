@@ -101,8 +101,6 @@ message :: (p: *Metaprogram_Plugin, message: *Message) {
 
         body.block.statements = new_statements;
 
-        // Submit the modify.
-        // log("Replacing body of \"%\"", h.name);
         compiler_modify_procedure(message.workspace, body);
     }
 }
@@ -128,7 +126,7 @@ __Tracy :: #import "Tracy"(IMPORT_MODE=.CLIENT);
 #add_context _Tracy :: __Tracy;
 DONE
 
-PREPEND_ZONE_CODE :: #code Context._Tracy.ZoneScoped();
+PREPEND_ZONE_CODE :: #code context._Tracy.ZoneScoped();
 
 #scope_module
 #import "Basic";
