@@ -23,8 +23,11 @@
 
 	// Call this at the start of the scope you want to profile.
 	ZoneScoped :: ($name := "", text := "", color: u32 = 0, value: u64 = 0) #expand #no_debug {
+		// In case profiler_running is modified in between start and end
+		running := profiler_running;
+
 		tracy_ctx: TracyCZoneCtx;
-		if profiler_running {
+		if running {
 	        location := #location(#this);
 			#if name {
 				ZONE_NAME :: name;
@@ -45,7 +48,7 @@
 			if value ___tracy_emit_zone_value(tracy_ctx, value);
 		}
 
-		`defer if profiler_running {
+		`defer if running {
 			___tracy_emit_zone_end(tracy_ctx);
 		}
 	}
