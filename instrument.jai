@@ -63,7 +63,13 @@ message :: (p: *Metaprogram_Plugin, message: *Message) {
         h := body.header;
         assert(h != null);
 
-        if h.procedure_flags & (h.procedure_flags.POLYMORPHIC | .COMPILER_GENERATED | .SYNTACTICALLY_MARKED_AS_COMPILER | .QUICK | .TYPE_ONLY | .MACRO) continue;  // @Incomplete: Need maybe we want a user-generated compile_time flag; that would be different than this, which is to detect #compiler.
+        allow_flags : type_of(h.procedure_flags);
+        allow_flags |= .DEBUG_DUMP | .SYMMETRIC | .SYNTACTICALLY_MARKED_AS_INLINE_NO;
+        // @Incomplete: Need maybe we want a user-generated compile_time flag; that would be
+        // different than this, which is to detect #compiler.
+        if h.procedure_flags & ~allow_flags {
+            continue;
+        }
 
         file := body.enclosing_load;
 
