@@ -95,7 +95,7 @@ message :: (p: *Metaprogram_Plugin, message: *Message) {
 
         for h.notes {
             if it.text == "NoProfile" {
-                log("[Tracy] Skipping \"%\" due to NoProfile note.\n", h.name);
+                // log("[Tracy] Skipping \"%\" due to NoProfile note.\n", h.name);
                 continue;
             }
         }
@@ -133,7 +133,7 @@ __Tracy :: #import "Tracy"(IMPORT_MODE=.CLIENT);
 #add_context _Tracy :: __Tracy;
 DONE
 
-PREPEND_ZONE_CODE :: #code context._Tracy.ZoneScoped();
+PREPEND_ZONE_CODE :: #code context._Tracy.ZoneScoped(location=.{});
 
 #scope_module
 #import "Basic";

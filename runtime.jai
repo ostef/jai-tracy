@@ -22,25 +22,19 @@
 	}
 
 	// Call this at the start of the scope you want to profile.
-	ZoneScoped :: ($name := "", text := "", color: u32 = 0, value: u64 = 0) #expand #no_debug {
+	ZoneScoped :: (name := "", text := "", color: u32 = 0, value: u64 = 0, location := #caller_location) #expand #no_debug {
 		// In case profiler_running is modified in between start and end
 		running := profiler_running;
 
 		tracy_ctx: TracyCZoneCtx;
 		if running {
-	        location := #location(#this);
-			#if name {
-				ZONE_NAME :: name;
-			} else {
-	            PROC_NAME :: #procedure_name(#this);
-	            #if PROC_NAME {
-	                ZONE_NAME :: PROC_NAME;
-	            } else {
-	                ZONE_NAME :: "<anonymous_procedure>";
-	            }
-			}
+			zone_name := ifx name then name else #procedure_name(#this);
+			if !zone_name
+				zone_name = "<anonymous_procedure>";
 
-			tracy_loc := ___tracy_alloc_srcloc(xx location.line_number, location.fully_pathed_filename.data, xx location.fully_pathed_filename.count, ZONE_NAME.data, ZONE_NAME.count);
+			loc := ifx location.fully_pathed_filename then location else #location(#this);
+
+			tracy_loc := ___tracy_alloc_srcloc(xx loc.line_number, loc.fully_pathed_filename.data, xx loc.fully_pathed_filename.count, zone_name.data, xx zone_name.count);
 			tracy_ctx = ___tracy_emit_zone_begin_alloc(tracy_loc, 1);
 
 			if text  ___tracy_emit_zone_text(tracy_ctx, text.data, cast(u64) text.count);
@@ -68,5 +62,5 @@
 	IsRunning :: inline () -> bool #must { return false; }
 	ToggleProfiler :: inline () {}
 	FrameMark :: () #expand #no_debug {}
-	ZoneScoped :: ($name := "", text := "", color: u32 = 0, value: u64 = 0, location := #caller_location) #expand #no_debug {}
+	ZoneScoped :: (name := "", text := "", color: u32 = 0, value: u64 = 0, location := #caller_location) #expand #no_debug {}
 }
