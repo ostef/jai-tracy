@@ -65,6 +65,7 @@ message :: (p: *Metaprogram_Plugin, message: *Message) {
 
         allow_flags : type_of(h.procedure_flags);
         allow_flags |= .DEBUG_DUMP | .SYMMETRIC | .SYNTACTICALLY_MARKED_AS_INLINE_NO;
+        allow_flags |= .POLYMORPHIC;
         // @Incomplete: Need maybe we want a user-generated compile_time flag; that would be
         // different than this, which is to detect #compiler.
         if h.procedure_flags & ~allow_flags {
