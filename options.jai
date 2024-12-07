@@ -31,8 +31,8 @@ handle_one_option :: (p: *Metaprogram_Plugin, options: [] string, cursor: int) -
         my.min_size = result;
         return cursor + 2;
 
-      case "-modules";
-        my.instrument_modules = true;
+      case "-no_modules";
+        my.instrument_modules = false;
         return cursor + 1;
     }
 
@@ -55,5 +55,5 @@ HELP_STRING :: #string DONE
                    while still instrumenting major program locations.
                    The default is %1.
 
--modules           Instrument modules, as well as the main program.
+-no_modules        Do not instrument modules.
 DONE
