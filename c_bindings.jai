@@ -3,67 +3,67 @@
 //
 
 ___tracy_source_location_data :: struct {
-	name:  *u8;
-	function: *u8;
-	file:  *u8;
-	line:  u32;
-	color: u32;
+    name:  *u8;
+    function: *u8;
+    file:  *u8;
+    line:  u32;
+    color: u32;
 }
 
 ___tracy_c_zone_context :: struct {
-	id: u32;
-	active: s32;
+    id: u32;
+    active: s32;
 }
 
 ___tracy_gpu_time_data :: struct {
-	gpuTime: s64;
-	queryId: s64;
-	_context: u8;
+    gpuTime: s64;
+    queryId: s64;
+    _context: u8;
 }
 
 ___tracy_gpu_zone_begin_data :: struct {
-	srcloc:  u64;
-	queryId: u16;
-	_context: u8;
+    srcloc:  u64;
+    queryId: u16;
+    _context: u8;
 }
 
 ___tracy_gpu_zone_begin_callstack_data :: struct {
-	srcloc:  u64;
-	depth:   s32;
-	queryId: u16;
-	_context: u8;
+    srcloc:  u64;
+    depth:   s32;
+    queryId: u16;
+    _context: u8;
 }
 
 ___tracy_gpu_zone_end_data :: struct {
-	queryId: u16;
-	_context: u8;
+    queryId: u16;
+    _context: u8;
 }
 
 ___tracy_gpu_new_context_data :: struct {
-	gpuTime: s64;
-	period:  float32;
-	_context: u8;
-	flags:   u8;
-	type:    u8;
+    gpuTime: s64;
+    period:  float32;
+    _context: u8;
+    flags:   u8;
+    type:    u8;
 }
 
 ___tracy_gpu_context_name_data :: struct {
-	_context: u8;
-	name:    *u8;
-	len:     u16;
+    _context: u8;
+    name:    *u8;
+    len:     u16;
 }
 
 ___tracy_gpu_calibration_data :: struct {
-	gpuTime:  s64;
-	cpuDelta: s64;
-	_context:  u8;
+    gpuTime:  s64;
+    cpuDelta: s64;
+    _context:  u8;
 }
 
 TracyCZoneCtx :: ___tracy_c_zone_context;
 
 #if false { // Incomplete: These are only usable when tracy is compiled with TRACY_MANUAL_LIFETIME.
-	___tracy_startup_profiler :: () #foreign TracyClientLib;
-	___tracy_shutdown_profiler :: () #foreign TracyClientLib;
+    ___tracy_startup_profiler :: () #foreign TracyClientLib;
+    ___tracy_shutdown_profiler :: () #foreign TracyClientLib;
 }
 
 ___tracy_alloc_srcloc :: (line: u32, source: *u8, sourceSz: u64, function: *u8, functionSz: u64) -> u64 #foreign TracyClientLib;
@@ -102,8 +102,8 @@ ___tracy_emit_gpu_calibration_serial :: (data: ___tracy_gpu_calibration_data) #f
 ___tracy_connected :: () -> s32 #foreign TracyClientLib;
 
 #if false { // Incomplete: These are only usable when tracy is compiled with TRACY_FIBERS.
-	___tracy_fiber_enter :: (fiber: *u8) #foreign TracyClientLib;
-	___tracy_fiber_leave :: () #foreign TracyClientLib;
+    ___tracy_fiber_enter :: (fiber: *u8) #foreign TracyClientLib;
+    ___tracy_fiber_leave :: () #foreign TracyClientLib;
 }
 
 ___tracy_emit_memory_alloc :: (ptr: *void, size: u64, secure: s32) #foreign TracyClientLib;
