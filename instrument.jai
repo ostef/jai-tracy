@@ -160,7 +160,7 @@ My_Plugin :: struct {
     //
     csv_output_filename: string;
     min_size := MINIMUM_SIZE_DEFAULT;
-    instrument_modules := false;
+    instrument_modules := true;
 
     //
     // The user should not mess with these:
