@@ -4,7 +4,7 @@
     #if OS == .WINDOWS {
         extra_args := string.["/DTRACY_ENABLE", "/DTRACY_EXPORTS"];
     } else {
-        extra_args := string.["-DTRACY_ENABLE", "-DTRACY_EXPORTS", "-std=c++11", "-Wno-deprecated-declarations"];
+        extra_args := string.["-DTRACY_ENABLE", "-DTRACY_EXPORTS", "-std=c++11", "-Wno-deprecated-declarations", "-mmacos-version-min=11.0"];
     }
 
     cpp_main_path := join(#filepath, "/Source/public/TracyClient.cpp");
